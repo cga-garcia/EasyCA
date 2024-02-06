@@ -3,8 +3,7 @@ Scripts for generating CA eaisly ;o)
 
 Everytime I have to generate certificates, I struggle on the web to find something easy to use and it became a nightmare ;o)
 
-I came out with thes 4 scripts that does the job and I decide to put them in security in a github repo
-And to share them ...
+I came out with these 4 scripts that does the job and I decided to share them ...
 
 You get a proper CA structure
 
@@ -12,6 +11,8 @@ You will get your certificates in multiple formats :
 - PEM
 - DER
 - PKCS12 (for Windows)
+
+Let me know if they have been useful for you !
 
 
 ## dependencies
