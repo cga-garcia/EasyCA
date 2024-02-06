@@ -18,11 +18,14 @@ OU=${O}
 CERT_LENGTH=2048
 CERT_EXPIRE=1095
 
+SIGN_SELF=no
+SERVER_CERT=no
+
 # ***** command line interpreter *****
 
 function usage
 {
-	echo "usage: ${0} -cn <common name> [-email <email>] [-selfsign | -certfile <cert file path> -keyfile <key file path>]"
+	echo "usage: ${0} -cn <common name> [-email <email>] [-selfsign | -issuerCn <issuer common name>]"
 	echo "            [-c | -country <country id>] [-st | -state <state name>] [-l | -location <city name>]"
 	echo "            [-o | -organisation <organisation name>] [-ou | -organisationunit <organisation unit name>]"
 	echo "            [-server]"
@@ -66,16 +69,10 @@ do
 			C=${1}
 			;;
 
-		-keyfile )
+		-issuerCn )
 			shift
-			SIGN_KEY=${1}
-			[ -z ${SIGN_SELF} ] && SIGN_SELF=no
-			;;
-
-		-certfile )
-			shift
-			SIGN_CERT=${1}
-			[ -z ${SIGN_SELF} ] && SIGN_SELF=no
+			ISSUER_CN=${1}
+			SIGN_SELF=no
 			;;
 
 		-selfsign )
@@ -107,7 +104,8 @@ then
 	exit 2
 fi
 
-PREFIX=`echo ${CN}-${EMAIL} | sed -e "s/\./_/g" -e "s/@/_/g" -e "s/ /_/g" -e "s/-$//"`
+CN=`echo ${CN} | sed -e "s/\./_/g" -e "s/@/_/g" -e "s/ /_/g"`
+ISSUER_CN=`echo ${ISSUER_CN} | sed -e "s/\./_/g" -e "s/@/_/g" -e "s/ /_/g"`
 
 # ***** generate certificate *****
 
@@ -124,14 +122,14 @@ openssl req \
 	-config ${CONFIG} \
 	-new -newkey rsa:${CERT_LENGTH} -nodes \
 	-subj "/CN=${CN}/emailAddress=${EMAIL}/O=${O}/OU=${OU}/C=${C}/ST=${ST}/L=${L}" \
-	-keyout ${PRIVATE}/${PREFIX}.key -out ${CERTS}/${PREFIX}.req
-chmod 600 ${PRIVATE}/${PREFIX}.key
+	-keyout ${PRIVATE}/${CN}.key -out ${CERTS}/${CN}.req
+chmod 600 ${PRIVATE}/${CN}.key
 
 echo
 echo "2. create certificate"
 echo
 
-SIGN_OPTS="-cert ${SIGN_CERT} -keyfile ${SIGN_KEY}"
+SIGN_OPTS="-cert ${CERTS}/${ISSUER_CN}.pem -keyfile ${PRIVATE}/${ISSUER_CN}.key"
 if [ "${SIGN_SELF}" = "yes" ]
 then
 	SIGN_OPTS="-selfsign"
@@ -147,18 +145,18 @@ openssl ca \
 	-config ${CONFIG} \
 	-days ${CERT_EXPIRE} \
 	${SIGN_OPTS} ${EXTS} \
-	-in ${CERTS}/${PREFIX}.req -out ${CERTS}/${PREFIX}.pem
-rm ${CERTS}/${PREFIX}.req
+	-in ${CERTS}/${CN}.req -out ${CERTS}/${CN}.pem
+rm ${CERTS}/${CN}.req
 
 openssl x509 \
 	-outform DER \
-	-in ${CERTS}/${PREFIX}.pem -out ${CERTS}/${PREFIX}.der
+	-in ${CERTS}/${CN}.pem -out ${CERTS}/${CN}.der
 
-HASH=`openssl x509 -noout -hash -in ${CERTS}/${PREFIX}.pem`
+HASH=`openssl x509 -noout -hash -in ${CERTS}/${CN}.pem`
 for ITER in 0 1 2 3 4 5 6 7 8 9
 do
 	[ -f "${CERTS}/${HASH}.${ITER}" ] && continue
-	ln -s "${PREFIX}.pem" "${CERTS}/${HASH}.${ITER}"
+	ln -s "${CN}.pem" "${CERTS}/${HASH}.${ITER}"
 	[ -L "${CERTS}/${HASH}.${ITER}" ] && break
 done
 
@@ -167,5 +165,5 @@ echo "3. prepare pkcs12 package"
 echo
 
 openssl pkcs12 \
-	-export -inkey ${PRIVATE}/${PREFIX}.key \
-	-in ${CERTS}/${PREFIX}.pem -out ${CERTS}/${PREFIX}.p12
+	-export -inkey ${PRIVATE}/${CN}.key \
+	-in ${CERTS}/${CN}.pem -out ${CERTS}/${CN}.p12
