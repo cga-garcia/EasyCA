@@ -25,7 +25,7 @@ SERVER_CERT=no
 
 function usage
 {
-	echo "usage: ${0} -cn <common name> [-email <email>] [-selfsign | -issuerCn <issuer common name>]"
+	echo "usage: ${0} -cn <common name> [-email <email>] [-selfsign | -icn | -issuerCn <issuer common name>]"
 	echo "            [-c | -country <country id>] [-st | -state <state name>] [-l | -location <city name>]"
 	echo "            [-o | -organisation <organisation name>] [-ou | -organisationunit <organisation unit name>]"
 	echo "            [-server]"
@@ -69,7 +69,7 @@ do
 			C=${1}
 			;;
 
-		-issuerCn )
+		-icn | issuerCn )
 			shift
 			ISSUER_CN=${1}
 			SIGN_SELF=no
