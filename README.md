@@ -15,7 +15,7 @@ You will get your certificates in multiple formats :
 Let me know if they have been useful for you !
 
 
-## dependencies
+## Dependencies
 ### openssl
 Used to create the certificates
 
