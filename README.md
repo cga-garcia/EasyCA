@@ -88,6 +88,9 @@ It is possible to set an empty passphrase even if this is a bit dangerous.
 This script extracts information from the certificates
 
 Available info are :
+- certificate subject
+- issuer subject
+- certificate hash
 - validity dates
 
 
