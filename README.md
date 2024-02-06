@@ -1,5 +1,5 @@
 # EasyCA
-Scripts for generating CA eaisly ;o)
+Scripts for generating CA and certificates easily ;o)
 
 Everytime I have to generate certificates, I struggle on the web to find something easy to use and it became a nightmare ;o)
 
