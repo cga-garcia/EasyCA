@@ -20,11 +20,6 @@ Used only by the `cert-pack.sh` script if you need to send the certificates to s
 
 
 ## Define your default values
-### openssl.cnf
-By default `openssl` will consider running in the CA directory
-
-But you can modify the `dir` (line 37) value to match your CA directory
-
 ### cert-gen.sh
 modify the default values to match your needs
 
