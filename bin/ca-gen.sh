@@ -22,7 +22,19 @@ rm ${PRIVATE}/* ${CERTS}/* ${NEWCERTS}/*
 
 ./bin/cert-gen.sh -cn ${CA_CN} -selfsign
 
-# ***** create user certificates *****
+# ********************************************************************
+# ***** create server / user certificates (1 level of signature) *****
+# ********************************************************************
 
-#./bin/cert-gen.sh -cn my-user-cn -server -certfile ${CERTS}/${CA_CN}.pem -keyfile ${PRIVATE}/${CA_CN}.key
+#./bin/cert-gen.sh -cn my_server_cn -server -certfile ${CERTS}/${CA_CN}.pem -keyfile ${PRIVATE}/${CA_CN}.key
+#./bin/cert-gen.sh -cn my_user_cn -certfile ${CERTS}/${CA_CN}.pem -keyfile ${PRIVATE}/${CA_CN}.key
+
+# ****************************************************************************************
+# ***** create intermediate cert + server / user certificates (2 level of signature) *****
+# ****************************************************************************************
+
+# ./bin/cert-gen.sh -cn my_intermediate_cn -server -certfile ${CERTS}/${CA_CN}.pem -keyfile ${PRIVATE}/${CA_CN}.key
+
+# ./bin/cert-gen.sh -cn my_server_cn -server -certfile ${CERTS}/my_intermediate_cn.pem -keyfile ${PRIVATE}/my_intermediate_cn.key
+# ./bin/cert-gen.sh -cn my_user_cn -certfile ${CERTS}/my_intermediate_cn.pem -keyfile ${PRIVATE}/my_intermediate_cn.key
 

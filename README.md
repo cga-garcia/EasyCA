@@ -6,8 +6,15 @@ Everytime I have to generate certificates, I struggle on the web to find somethi
 I came out with thes 4 scripts that does the job and I decide to put them in security in a github repo
 And to share them ...
 
-## dependencies
+You get a proper CA structure with all normalized names and hash links
 
+You will get your certificates in multiple formats :
+- PEM
+- DER
+- PKCS12 (for Windows)
+
+
+## dependencies
 ### openssl
 Used to create the certificates
 
@@ -41,6 +48,12 @@ the you can run commands
 ./bin/ca-gen.sh
 ```
 This is the script to create it all
+
+It is in there that you can configure all the certificates you need by adding calls to `cert-gen.sh`
+
+You will find in examples (in remark in the script) :
+- with 1 level of signature
+- with 2 level of signature
 
 It verifies :
 - directories existance
@@ -82,13 +95,7 @@ Available info are :
 ./bin/cert-pack.sh
 ```
 This script takes the certificate files and ZIP them together
+
 You can provide an email address and the zip fil will be sent
 
 It relies on `mutt` as the email client
-
-
-
-
-
-
-
