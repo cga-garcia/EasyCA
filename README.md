@@ -10,6 +10,7 @@ And to share them ...
 
 ### openssl
 Used to create the certificates
+
 you will find in the package a `openssl.cnf` file that is used to give it minimum config options
 
 ### mutt
@@ -19,7 +20,8 @@ Used only by the `cert-pack.sh` script if you need to send the certificates to s
 
 ## Define your default values
 ### openssl.cnf
-modify the `ca_cert_dir` to match your CA directory
+By default `openssl` will consider running in the CA directory
+But you can modify the `dir` (line 37) value to match your CA directory
 
 ### cert-gen.sh
 modify the default values to match your needs
@@ -59,6 +61,12 @@ It does all the work :
 - create the private key
 - create the certificate + signature
 - packages the certificate in PEM + PKCS12 (for Windows) formats
+
+The script asks some questions during the creation process = answear 'y'
+
+Then it asks for a passphrase = this is for the PKCS12 package that contains the public AND the private key. So it has to be crypted
+
+It is possible to set an empty passphrase even if this is a bit dangerous.
 
 ```
 ./bin/cert-info.sh

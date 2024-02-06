@@ -34,7 +34,7 @@ default_ca	= CA_default		# The default ca section
 ####################################################################
 [ CA_default ]
 
-dir			= .ca				# Where everything is kept
+dir			= .					# Where everything is kept
 certs		= $dir/certs		# Where the issued certs are kept
 crl_dir		= $dir/crl			# Where the issued crl are kept
 database	= $dir/index.txt	# database index file.
@@ -46,7 +46,7 @@ certificate	= $dir/certs/cacert.pem 	# The CA certificate
 serial		= $dir/serial 				# The current serial number
 crlnumber	= $dir/crlnumber			# the current crl number
 										# must be commented out to leave a V1 CRL
-crl		= $dir/crl.pem 					# The current CRL
+crl			= $dir/crl.pem 				# The current CRL
 private_key	= $dir/private/cacert.key 	# The private key
 RANDFILE	= $dir/private/.rand		# private random number file
 
@@ -65,10 +65,10 @@ cert_opt 	= ca_default		# Certificate field options
 # crlnumber must also be commented out to leave a V1 CRL.
 # crl_extensions	= crl_ext
 
-default_days		= 365		# how long to certify for
-default_crl_days	= 30		# how long before next CRL
-default_md			= sha256	# which md to use.
-preserve			= no		# keep passed DN ordering
+default_days			= 365	# how long to certify for
+default_crl_days		= 30	# how long before next CRL
+default_md				= sha1	# which md to use.
+preserve				= no	# keep passed DN ordering
 
 # A few difference way of specifying how similar the request should look
 # For type CA, the listed attributes must be the same, and the optional

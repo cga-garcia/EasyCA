@@ -24,5 +24,5 @@ rm ${PRIVATE}/* ${CERTS}/* ${NEWCERTS}/*
 
 # ***** create user certificates *****
 
-./bin/cert-gen.sh -cn my-user-cn -server -certfile ${CERTS}/${CA_CN}.pem -keyfile ${PRIVATE}/${CA_CN}.key
+#./bin/cert-gen.sh -cn my-user-cn -server -certfile ${CERTS}/${CA_CN}.pem -keyfile ${PRIVATE}/${CA_CN}.key
 

@@ -125,7 +125,6 @@ openssl req \
 	-new -newkey rsa:${CERT_LENGTH} -nodes \
 	-subj "/CN=${CN}/emailAddress=${EMAIL}/O=${O}/OU=${OU}/C=${C}/ST=${ST}/L=${L}" \
 	-keyout ${PRIVATE}/${PREFIX}.key -out ${CERTS}/${PREFIX}.req
-chgrp ssl-cert ${PRIVATE}/${PREFIX}.key
 chmod 600 ${PRIVATE}/${PREFIX}.key
 
 echo
