@@ -14,6 +14,7 @@ you will find in the package a `openssl.cnf` file that is used to give it minimu
 
 ### mutt
 As an email client
+
 Used only by the `cert-pack.sh` script if you need to send the certificates to someone
 
 ## Define your default values
@@ -30,8 +31,13 @@ Available values :
 - Organization
 
 ## Usage
+Open a terminal and create a directory for your new CA
+
+Ensure the `bin` directory and the `openssl.cnf` file are present in this directory
+the you can run commands
+
 ```
-ca-gen.sh
+./bin/ca-gen.sh
 ```
 This is the script to create it all
 
@@ -44,7 +50,7 @@ Then it runs `cert-gen.sh` to create :
 - the users certificates signed by the CA certificate
 
 ```
-cert-gen.sh
+./bin/cert-gen.sh
 ```
 This is the main script that pilots `openssl`
 
@@ -55,7 +61,7 @@ It does all the work :
 - packages the certificate in PEM + PKCS12 (for Windows) formats
 
 ```
-cert-info.sh
+./bin/cert-info.sh
 ```
 This script extracts information from the certificates
 
@@ -63,7 +69,7 @@ Available info are :
 - validity dates
 
 ```
-cert-pack.sh
+./bin/cert-pack.sh
 ```
 This script takes the certificate files and ZIP them together
 You can provide an email address and the zip fil will be sent
