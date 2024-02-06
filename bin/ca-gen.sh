@@ -33,7 +33,7 @@ rm ${PRIVATE}/* ${CERTS}/* ${NEWCERTS}/*
 # ***** create intermediate cert + server / user certificates (2 level of signature) *****
 # ****************************************************************************************
 
-./bin/cert-gen.sh -cn my_intermediate_cn -server -issuerCn ${CA_CN} 
+./bin/cert-gen.sh -cn my_intermediate_cn -issuerCn ${CA_CN} 
 
 ./bin/cert-gen.sh -cn my_server_cn -server -issuerCn my_intermediate_cn 
 ./bin/cert-gen.sh -cn my_user_cn -issuerCn my_intermediate_cn

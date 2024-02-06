@@ -69,7 +69,7 @@ do
 			C=${1}
 			;;
 
-		-icn | issuerCn )
+		-icn | -issuerCn )
 			shift
 			ISSUER_CN=${1}
 			SIGN_SELF=no
@@ -104,8 +104,15 @@ then
 	exit 2
 fi
 
-CN=`echo ${CN} | sed -e "s/\./_/g" -e "s/@/_/g" -e "s/ /_/g"`
-ISSUER_CN=`echo ${ISSUER_CN} | sed -e "s/\./_/g" -e "s/@/_/g" -e "s/ /_/g"`
+if [ "${SIGN_SELF}" = "no" & "${ISSUER_CN}" = "" ]
+then
+	echo "ERROR : -issuerCn option is mandatory"
+	usage
+	exit 3
+fi
+
+# CN=`echo ${CN} | sed -e "s/\./_/g" -e "s/@/_/g" -e "s/ /_/g"`
+# ISSUER_CN=`echo ${ISSUER_CN} | sed -e "s/\./_/g" -e "s/@/_/g" -e "s/ /_/g"`
 
 # ***** generate certificate *****
 
@@ -120,7 +127,7 @@ echo
 
 openssl req \
 	-config ${CONFIG} \
-	-new -newkey rsa:${CERT_LENGTH} -nodes \
+	-new -newkey rsa:${CERT_LENGTH} \
 	-subj "/CN=${CN}/emailAddress=${EMAIL}/O=${O}/OU=${OU}/C=${C}/ST=${ST}/L=${L}" \
 	-keyout ${PRIVATE}/${CN}.key -out ${CERTS}/${CN}.req
 chmod 600 ${PRIVATE}/${CN}.key
