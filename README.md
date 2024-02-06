@@ -12,6 +12,10 @@ And to share them ...
 Used to create the certificates
 you will find in the package a `openssl.cnf` file that is used to give it minimum config options
 
+### mutt
+As an email client
+Used only by the `cert-pack.sh` script if you need to send the certificates to someone
+
 ## Define your default values
 ### openssl.cnf
 modify the `ca_cert_dir` to match your CA directory
