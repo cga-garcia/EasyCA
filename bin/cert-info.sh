@@ -45,5 +45,5 @@ then
 fi
 
 # ===== prepare ZIP file =====
-openssl x509 -dates -noout -in ${CERTS}/${CN}.pem
+openssl x509 -subject -issuer -hash -dates -noout -in ${CERTS}/${CN}.pem
 

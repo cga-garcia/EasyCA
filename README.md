@@ -6,7 +6,7 @@ Everytime I have to generate certificates, I struggle on the web to find somethi
 I came out with thes 4 scripts that does the job and I decide to put them in security in a github repo
 And to share them ...
 
-You get a proper CA structure with all normalized names and hash links
+You get a proper CA structure
 
 You will get your certificates in multiple formats :
 - PEM
