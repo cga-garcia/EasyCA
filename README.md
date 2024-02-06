@@ -53,7 +53,7 @@ This is the script to create it all
 
 It is in there that you can configure all the certificates you need by adding calls to `cert-gen.sh`
 
-You will find in examples (in remark in the script) :
+You will find examples (in remark in the script) :
 - with 1 level of signature
 - with 2 level of signature
 
