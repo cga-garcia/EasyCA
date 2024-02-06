@@ -150,6 +150,10 @@ openssl ca \
 	-in ${CERTS}/${PREFIX}.req -out ${CERTS}/${PREFIX}.pem
 rm ${CERTS}/${PREFIX}.req
 
+openssl x509 \
+	-outform DER \
+	-in ${CERTS}/${PREFIX}.pem -out ${CERTS}/${PREFIX}.der
+
 HASH=`openssl x509 -noout -hash -in ${CERTS}/${PREFIX}.pem`
 for ITER in 0 1 2 3 4 5 6 7 8 9
 do
