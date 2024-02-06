@@ -42,7 +42,8 @@ Available values :
 Open a terminal and create a directory for your new CA
 
 Ensure the `bin` directory and the `openssl.cnf` file are present in this directory
-the you can run commands
+
+Then you can run commands
 
 
 ```
