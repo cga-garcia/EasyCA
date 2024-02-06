@@ -18,9 +18,11 @@ As an email client
 
 Used only by the `cert-pack.sh` script if you need to send the certificates to someone
 
+
 ## Define your default values
 ### openssl.cnf
 By default `openssl` will consider running in the CA directory
+
 But you can modify the `dir` (line 37) value to match your CA directory
 
 ### cert-gen.sh
@@ -32,11 +34,13 @@ Available values :
 - City
 - Organization
 
+
 ## Usage
 Open a terminal and create a directory for your new CA
 
 Ensure the `bin` directory and the `openssl.cnf` file are present in this directory
 the you can run commands
+
 
 ```
 ./bin/ca-gen.sh
@@ -50,6 +54,7 @@ It verifies :
 Then it runs `cert-gen.sh` to create :
 - the main CA certificate (selfsigned)
 - the users certificates signed by the CA certificate
+
 
 ```
 ./bin/cert-gen.sh
@@ -68,6 +73,7 @@ Then it asks for a passphrase = this is for the PKCS12 package that contains the
 
 It is possible to set an empty passphrase even if this is a bit dangerous.
 
+
 ```
 ./bin/cert-info.sh
 ```
@@ -75,6 +81,7 @@ This script extracts information from the certificates
 
 Available info are :
 - validity dates
+
 
 ```
 ./bin/cert-pack.sh
