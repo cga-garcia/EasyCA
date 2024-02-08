@@ -99,6 +99,11 @@ It does all the work :
 - Create the certificate + signature
 - Packages the certificate in PEM + PKCS12 (for Windows) formats
 
+The generated file are located :
+
+- private keys in the `private` directory
+- certificates PEM / DER / PKCS12 in the `certs` directory
+
 ## ./bin/ca-gen.sh
 
 This is the script to create it all
