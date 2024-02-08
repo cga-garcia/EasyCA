@@ -1,0 +1,113 @@
+[ ca ]
+default_ca                      = ca_defaults        # The default ca section
+
+[ ca_defaults ]
+dir                             = .
+policy                          = policy_match
+x509_extensions                 = root
+
+certs                           = $dir/certs                # Where the issued certs are kept
+crl_dir                         = $dir/crl                  # Where the issued crl are kept
+database                        = $dir/index.txt            # database index file.
+new_certs_dir                   = $dir/newcerts             # default place for new certs.
+serial                          = $dir/serial               # The current serial number
+crlnumber                       = $dir/crlnumber            # the current crl number
+crl                             = $dir/crl.pem              # The current CRL
+private_key                     = $dir/private/cacert.key   # The private key
+RANDFILE                        = $dir/private/.rand        # private random number file
+
+default_days                    = 365                       # how long to certify for
+default_crl_days                = 30                        # how long before next CRL
+default_md                      = sha256                    # which md to use.
+preserve                        = no                        # keep passed DN ordering
+
+[ policy_match ]
+countryName                     = match
+stateOrProvinceName             = match
+organizationName                = match
+organizationalUnitName          = optional
+commonName                      = supplied
+emailAddress                    = optional
+
+[ req_distinguished_name ]
+countryName                     = Country Name (2 letter code)
+countryName_default             = US
+countryName_min                 = 2
+countryName_max                 = 2
+stateOrProvinceName             = State or Province Name (full name) ## Print this message
+stateOrProvinceName_default     = New York
+localityName                    = Locality Name (eg, city) ## Print this message
+localityName_default            = New York
+0.organizationName              = Organization Name (eg, company) ## Print this message
+0.organizationName_default      = Organization
+organizationalUnitName          = Organizational Unit Name (eg, section) ## Print this message
+organizationalUnitName_default  = Organization unit
+commonName                      = Common Name (eg, your name or your server hostname) ## Print this message
+commonName_max                  = 64
+emailAddress                    = Email Address ## Print this message
+emailAddress_max                = 64
+
+# ***** extensions sections *****
+
+# ====================================================
+# remarks found in openssl.cnf original file :
+# concerns root and intermediate sections
+# basicConstraints  = even if recommended, some system could complain about "critical". remove if needed
+# keyUsage          = even if recommended, it could prevent from using self signed certs. remove the directive if needed
+# ====================================================
+
+[ root ]
+basicConstraints                = critical, CA:TRUE
+subjectKeyIdentifier            = hash	 
+authorityKeyIdentifier          = keyid:always, issuer
+
+keyUsage                        = critical, cRLSign, keyCertSign, digitalSignature
+
+subjectAltName                  = @alt_section
+
+# *****
+
+[ intermediate ]
+basicConstraints                = CA:TRUE, pathlen:0
+subjectKeyIdentifier            = hash	 
+authorityKeyIdentifier          = keyid:always, issuer
+
+keyUsage                        = critical, cRLSign, keyCertSign, digitalSignature
+
+subjectAltName                  = @alt_section
+
+# *****
+
+[ server ]
+nsCertType                      = server
+basicConstraints                = CA:FALSE
+subjectKeyIdentifier            = hash	 
+authorityKeyIdentifier          = keyid, issuer
+
+keyUsage                        = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage                = serverAuth
+
+subjectAltName                  = @alt_section
+
+# *****
+
+[ user ]
+nsCertType                      = client, email
+basicConstraints                = CA:FALSE
+subjectKeyIdentifier            = hash	 
+authorityKeyIdentifier          = keyid, issuer
+
+keyUsage                        = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage                = clientAuth, emailProtection
+
+subjectAltName                  = @alt_section
+
+# *****
+
+#[ req ]
+#req_extensions                  = req_ext
+
+[ req_ext ]
+subjectAltName                  = @alt_section
+
+[alt_section]
