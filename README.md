@@ -73,7 +73,6 @@ usage: ./bin/cert-gen.sh
     [-p     | --passphrase]
 
 Note :
-- you can use multiple -san options
 - you can use multiple -d options = multiple domain names covered by your certificate
 - you can use multiple -e options
 ```

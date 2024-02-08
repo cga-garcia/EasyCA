@@ -61,7 +61,7 @@ function usage()
 	echo "    [-p     | --passphrase]"
 	echo
 	echo "Note :"
-	echo "- you can use multiple -san options"
+	# echo "- you can use multiple -san options"
 	echo "- you can use multiple -d options = multiple domain names covered by your certificate"
 	echo "- you can use multiple -e options"
 }
