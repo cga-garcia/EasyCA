@@ -13,7 +13,7 @@ Let me know if they have been useful for you !
 - Create a proper CA structure
 - Supports different types of sertificates : root / intermediate / server / client
 - Supports certificate extensions to add email / domain (for SSL) in the certificates
-- Exports your certificates in multiple formats : PEM / DER / PKCS12 (for Windows)
+- Exports certificates in multiple formats : PEM / DER / PKCS12 (for Windows)
 
 ## Dependencies
 
@@ -21,34 +21,76 @@ Let me know if they have been useful for you !
 
 Used to create the certificates
 
-you will find in the package a `openssl.cnf` file that is used to give it minimum config options
-
 #### mutt
 
-As an email client
-
-Used only by the `cert-pack.sh` script if you need to send the certificates to someone
+As an email client. Used only by the `cert-pack.sh` script to email certificates to someone
 
 ## Define your default values
 
-### cert-gen.sh
-
-modify the default values to match your needs
+In `cert-gen.sh` you will find a default value section that you can modify to match your needs and make the certificate creation process easier. You can always override thos default values using command line options
 
 Available values :
 
-- Country
-- State
+- Country\*
+- State\*
 - City
-- Organization
+- Organization\*
+- Organization unit
+
+## Installation
+
+- Open a terminal
+- reate a directory for your new CA
+- Copy the `bin` and the `config` directories in your CA directory
+
+Your ready to go !
 
 ## Usage
 
-Open a terminal and create a directory for your new CA
+```
+./bin/cert-gen.sh
+```
 
-Ensure the `bin` directory and the `openssl.cnf` file are present in this directory
+```
+usage: ./bin/cert-gen.sh
+    [-cn  | --commonName <common name>]
 
-Then you can run commands
+    [-c   | --country <country id>]
+    [-st  | --state <state name>]
+    [-l   | --location <city name>]
+    [-o   | --organisation <organisation name>]
+    [-ou  | --organisationUnit <organisation unit name>]
+
+    [-d   | --domain <domain name (for SSL)>]
+    [-e   | --email <email>]
+
+    [--selfsign]
+    [-icn | --issuerCommonName <issuer common name>]
+
+    [--days <nb validity days>]
+    [--root | --intermediate | --server | --user]
+
+    [-p     | --passphrase]
+
+Note :
+- you can use multiple -san options
+- you can use multiple -d options = multiple domain names covered by your certificate
+- you can use multiple -e options
+```
+
+This is the main script that pilots `openssl`
+
+It does all the work :
+
+- Ask your for a passphrase to use for your private key and your PKSC12 package
+- creates the certificate request
+- create the private key
+- create the certificate + signature
+- packages the certificate in PEM + PKCS12 (for Windows) formats
+
+The script asks some questions during the creation process = answear 'y'
+
+Then it asks for a passphrase = this is for the PKCS12 package that contains the public AND the private key. So it has to be crypted
 
 ```
 ./bin/ca-gen.sh
@@ -74,25 +116,6 @@ Then it runs `cert-gen.sh` to create :
 
 - the main CA certificate (selfsigned)
 - the users certificates signed by the CA certificate
-
-```
-./bin/cert-gen.sh
-```
-
-This is the main script that pilots `openssl`
-
-It does all the work :
-
-- creates the certificate request
-- create the private key
-- create the certificate + signature
-- packages the certificate in PEM + PKCS12 (for Windows) formats
-
-The script asks some questions during the creation process = answear 'y'
-
-Then it asks for a passphrase = this is for the PKCS12 package that contains the public AND the private key. So it has to be crypted
-
-It is possible to set an empty passphrase even if this is a bit dangerous.
 
 ```
 ./bin/cert-info.sh
