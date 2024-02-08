@@ -25,6 +25,14 @@ Used to create the certificates
 
 As an email client. Used only by the `cert-pack.sh` script to email certificates to someone
 
+## Installation
+
+- Open a terminal
+- Create a directory for your new CA
+- Copy the `bin` and the `config` directories in your CA directory
+
+Your ready to go !
+
 ## Define your default values
 
 In `cert-gen.sh` you will find a default value section that you can modify to match your needs and make the certificate creation process easier. You can always override thos default values using command line options
@@ -37,13 +45,7 @@ Available values :
 - Organization\*
 - Organization unit
 
-## Installation
-
-- Open a terminal
-- reate a directory for your new CA
-- Copy the `bin` and the `config` directories in your CA directory
-
-Your ready to go !
+\* Mandatory values
 
 ## Usage
 
@@ -70,7 +72,7 @@ usage: ./bin/cert-gen.sh
     [--days <nb validity days>]
     [--root | --intermediate | --server | --user]
 
-    [-p     | --passphrase]
+    [-p   | --passphrase]
 
 Note :
 - you can use multiple -d options = multiple domain names covered by your certificate

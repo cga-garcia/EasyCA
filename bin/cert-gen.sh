@@ -58,7 +58,7 @@ function usage()
 	echo "    [--days <nb validity days>]"
 	echo "    [--root | --intermediate | --server | --user]"
 	echo
-	echo "    [-p     | --passphrase]"
+	echo "    [-p   | --passphrase]"
 	echo
 	echo "Note :"
 	# echo "- you can use multiple -san options"
