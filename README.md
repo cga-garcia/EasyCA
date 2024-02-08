@@ -49,9 +49,7 @@ Available values :
 
 ## Usage
 
-```
-./bin/cert-gen.sh
-```
+### ./bin/cert-gen.sh
 
 ```
 usage: ./bin/cert-gen.sh
@@ -103,9 +101,7 @@ It does all the work :
 - Create the certificate + signature
 - Packages the certificate in PEM + PKCS12 (for Windows) formats
 
-```
-./bin/ca-gen.sh
-```
+### ./bin/ca-gen.sh
 
 This is the script to create it all
 
@@ -128,9 +124,7 @@ Then it runs `cert-gen.sh` to create :
 - the main CA certificate (selfsigned)
 - the users certificates signed by the CA certificate
 
-```
-./bin/cert-info.sh
-```
+# ./bin/cert-info.sh
 
 This script extracts information from the certificates
 
@@ -141,9 +135,7 @@ Available info are :
 - certificate hash
 - validity dates
 
-```
-./bin/cert-pack.sh
-```
+# ./bin/cert-pack.sh
 
 This script takes the certificate files and ZIP them together
 
