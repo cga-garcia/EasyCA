@@ -6,25 +6,24 @@ Everytime I have to generate certificates, I struggle on the web to find somethi
 
 I came out with these 4 scripts that does the job and I decided to share them ...
 
-You get a proper CA structure
-
-You will get your certificates in multiple formats :
-
-- PEM
-- DER
-- PKCS12 (for Windows)
-
 Let me know if they have been useful for you !
+
+## Features
+
+- Create a proper CA structure
+- Supports different types of sertificates : root / intermediate / server / client
+- Supports certificate extensions to add email / domain (for SSL) in the certificates
+- Exports your certificates in multiple formats : PEM / DER / PKCS12 (for Windows)
 
 ## Dependencies
 
-### openssl
+#### openssl
 
 Used to create the certificates
 
 you will find in the package a `openssl.cnf` file that is used to give it minimum config options
 
-### mutt
+#### mutt
 
 As an email client
 
