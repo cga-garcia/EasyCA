@@ -13,10 +13,12 @@ CERT_DAYS=1095			# 3 years
 
 # ***** other variables *****
 
-BASE_CNF_FILE=./config/openssl.cnf
+CONFIG=./config
 CERTS=./certs
+NEWCERTS=./newcerts
 PRIVATE=./private
 
+BASE_CNF_FILE=${CONFIG}/openssl.cnf
 SELF_SIGN=no
 
 # ***** error handling *****
@@ -204,6 +206,15 @@ CERT_NAME=${CN}
 # ********************************
 # ***** generate certificate *****
 # ********************************
+
+# ***** prepare environment *****
+
+[ ! -e ${PRIVATE} ] && mkdir -p ${PRIVATE}
+[ ! -e ${CERTS} ] && mkdir -p ${CERTS}
+[ ! -e ${NEWCERTS} ] && mkdir -p ${NEWCERTS}
+
+[ ! -f index.txt ] && cat /dev/null > index.txt
+[ ! -f serial ] && echo "01" > serial
 
 echo "=============================================="
 echo "Generating certificate : ${CN}"
