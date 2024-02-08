@@ -79,19 +79,29 @@ Note :
 - you can use multiple -e options
 ```
 
-This is the main script that pilots `openssl`
+Command line examples :
+
+```
+# Create the ROOT certificate
+./bin/cert-gen.sh -cn cacert --root --selfsign
+
+# Create an INTERMEDIATE certificate
+./bin/cert-gen.sh -cn my_intermediate_cn -icn cacert --intermediate
+
+# Create SERVER or USER certificates
+./bin/cert-gen.sh -cn my_server_cn -icn my_intermediate_cn --server -d www.my_domain.com
+./bin/cert-gen.sh -cn my_user_cn -icn my_intermediate_cn --user -e my_user@my_domain.com
+```
 
 It does all the work :
 
-- Ask your for a passphrase to use for your private key and your PKSC12 package
-- creates the certificate request
-- create the private key
-- create the certificate + signature
-- packages the certificate in PEM + PKCS12 (for Windows) formats
+- Ask for missing mandatory values if not defined in the defaults or the command line
+- Ask for a passphrase to use for the private key and the PKSC12 package
 
-The script asks some questions during the creation process = answear 'y'
-
-Then it asks for a passphrase = this is for the PKCS12 package that contains the public AND the private key. So it has to be crypted
+- Creates the certificate request
+- Create the private key
+- Create the certificate + signature
+- Packages the certificate in PEM + PKCS12 (for Windows) formats
 
 ```
 ./bin/ca-gen.sh
