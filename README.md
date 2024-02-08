@@ -47,9 +47,7 @@ Available values :
 
 \* Mandatory values
 
-## Usage
-
-### ./bin/cert-gen.sh
+## ./bin/cert-gen.sh
 
 ```
 usage: ./bin/cert-gen.sh
@@ -83,10 +81,10 @@ Command line examples :
 # Create the ROOT certificate
 ./bin/cert-gen.sh -cn cacert --root --selfsign
 
-# Create an INTERMEDIATE certificate
+# Create an INTERMEDIATE certificate signed by ROOT
 ./bin/cert-gen.sh -cn my_intermediate_cn -icn cacert --intermediate
 
-# Create SERVER or USER certificates
+# Create SERVER or USER certificates signed by INTERMEDIATE
 ./bin/cert-gen.sh -cn my_server_cn -icn my_intermediate_cn --server -d www.my_domain.com
 ./bin/cert-gen.sh -cn my_user_cn -icn my_intermediate_cn --user -e my_user@my_domain.com
 ```
@@ -96,12 +94,12 @@ It does all the work :
 - Ask for missing mandatory values if not defined in the defaults or the command line
 - Ask for a passphrase to use for the private key and the PKSC12 package
 
-- Creates the certificate request
 - Create the private key
+- Creates the certificate request
 - Create the certificate + signature
 - Packages the certificate in PEM + PKCS12 (for Windows) formats
 
-### ./bin/ca-gen.sh
+## ./bin/ca-gen.sh
 
 This is the script to create it all
 
@@ -124,7 +122,7 @@ Then it runs `cert-gen.sh` to create :
 - the main CA certificate (selfsigned)
 - the users certificates signed by the CA certificate
 
-# ./bin/cert-info.sh
+## ./bin/cert-info.sh
 
 This script extracts information from the certificates
 
@@ -135,7 +133,7 @@ Available info are :
 - certificate hash
 - validity dates
 
-# ./bin/cert-pack.sh
+## ./bin/cert-pack.sh
 
 This script takes the certificate files and ZIP them together
 
